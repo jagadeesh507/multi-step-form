@@ -1,15 +1,15 @@
 import React from 'react'
 import { Flex,Box, useColorModeValue, Button,Input,chakra, Heading, Switch} from '@chakra-ui/react';
 import Personalinfo from './Personalinfo';
-import Step1Schema from '../Validations/Step1valid';
-import Step3Schema from '../Validations/Step3valid';
-import Step2Schema from '../Validations/Step2Valid';
 import { Formik,Form,validationSchema} from 'formik';
 import Educationalinfo from './Educationalinfo';
 import Completeinfo from './Completeinfo';
 import ExprienceAndcertification from './ExprienceAndcertification';
 import { useState } from 'react';
-import {InitialValues} from "./InitalValues"
+import {InitialValues} from "./InitalValues";
+import { Step1valid } from '../Validations/Step1valid';
+import { Step2Valid } from '../Validations/Step2Valid';
+import { Step3valid } from '../Validations/Step3valid';
 function Card() {
   const [step,setStep]=useState(1);
   const nextStep = async() => {
@@ -25,11 +25,11 @@ function Card() {
     }
     let validation
     switch(step){
-      case 1:validation=Step1Schema
+      case 1:validation=Step1valid
       break;
-      case 2:validation=Step2Schema
+      case 2:validation=Step2Valid
       break;
-      case 3:validation=Step3Schema
+      case 3:validation=Step3valid
       break;
     }
   return (

@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const Step2Valid = Yup.object().shape({
+export const Step2Valid = Yup.object().shape({
   schoolname: Yup.string().required("required!"),
   schoolcgpa: Yup.number().required(" required!"),
   schoolpassyear: Yup.date().required("required!"),
@@ -11,4 +11,4 @@ const Step2Valid = Yup.object().shape({
   degreepassyear:Yup.number().required("required!"),
 });
 
-export default Step2Valid;
+

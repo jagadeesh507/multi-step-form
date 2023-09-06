@@ -5,7 +5,6 @@ import {
   chakra,
   Input,
  Textarea,
- File
 } from "@chakra-ui/react";
 import { ErrorMessage, Field } from "formik";
 import React from "react";
@@ -36,7 +35,7 @@ function ExprienceAndcertification() {
       </FormControl>
     <FormControl>
         <FormLabel>Experience Certificate </FormLabel>
-        <Field as={File} name="certificationCourses" type="File"/>
+        <Field  name="certificationCourses" type="file"/>
     </FormControl>
     </chakra.div>
   );

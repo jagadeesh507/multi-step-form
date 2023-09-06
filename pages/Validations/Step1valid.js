@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const Step1Schema = Yup.object().shape({
+export const Step1valid = Yup.object().shape({
   fname: Yup.string().required("Name is required!"),
   lname: Yup.string().required("Name is required!"),
   email: Yup.string().email().required("Email is required!"),
@@ -10,4 +10,3 @@ const Step1Schema = Yup.object().shape({
   address: Yup.string().required("Address is required!"),
 });
 
-export default Step1Schema;
