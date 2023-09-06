@@ -7,8 +7,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
-import { FaCloudMoon } from "react-icons/fa";
-import { BsCloudSunFill } from "react-icons/bs";
+import { BsMoon} from "react-icons/bs";
+import {BiSun} from "react-icons/bi"
 function ThemeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -27,9 +27,9 @@ function ThemeButton() {
       </Heading>
       <Button onClick={toggleColorMode} color={"white"} variant={"unstyled"}>
         {colorMode === "light" ? (
-          <FaCloudMoon fontSize={"30px"} />
+          <BsMoon fontSize={"24px"}/>
         ) : (
-          <BsCloudSunFill fontSize={"30px"} />
+          <BiSun _hover={{color:"red.700"}} fontSize={"30px"} />
         )}
       </Button>
     </Box>
