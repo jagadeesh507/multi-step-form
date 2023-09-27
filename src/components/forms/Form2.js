@@ -44,7 +44,7 @@ function Form2() {
       <ul className="grid w-full gap-4 md:grid-cols-3">
         {data.map((item) => (
           <li key={item.id}>
-            <Field  
+            <input  
               type="radio"
               id={item.id}
               name="select"

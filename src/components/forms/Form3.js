@@ -6,16 +6,19 @@ function Form3() {
 
   const data=[
     {
+      id:1,
       Servicetype:"Online service",
       access:"Access to multiplayer games",
       plan:10
     },
     {
+      id:2,
       Servicetype:"Larger storage",
       access:"Extra 1TB of cloud save",
       plan:20,
     },
     {
+      id:3,
       Servicetype:"Customizable profile",
       access:"Custom theme on your profile",
       plan:30
@@ -33,11 +36,12 @@ function Form3() {
         {
           data.map((values,index)=>(
             <div key={index} className="flex items-center pl-4 border border-gray-200 rounded pointer ">
-          <Field as={Checkbox}
+          <input
           id={values.Servicetype}
             type="checkbox"
-            value={values.plan}
+            value={values.id}
             name="checked"
+            
             className="w-6 h-6 text-blue-900 bg-gray-100 border-gray-300 rounded "
           />
           <label
