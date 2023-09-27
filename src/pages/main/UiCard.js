@@ -1,15 +1,27 @@
-import React, { useState } from "react";
-import {Box,Flex,Button} from "@chakra-ui/react"
+import React, { useEffect, useState } from "react";
+import {Box,Flex,Button, Spacer} from "@chakra-ui/react"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Form, Formik } from "formik";
-import Form1 from "../forms/Form1";
-import Form2 from "../forms/Form2";
-import Form3 from "../forms/Form3";
-import Form4 from "../forms/Form4";
-import Form5 from "../forms/Form5";
-import { validation1 } from "../validations/FormValidation";
+
+import Form1 from "@/components/forms/Form1";
+import Form2 from "@/components/forms/Form2";
+import Form3 from "@/components/forms/Form3";
+import Form4 from "@/components/forms/Form4";
+import Form5 from "@/components/forms/Form5";
+
 import FormStepper from "./FormStepper";
+
+import { validation1 } from "@/components/validations/FormValidation";
+
+import SignOut from "@/components/auth/SignOut";
+
+import { auth } from "@/components/auth/firebaseconfig";
+
+import { useRouter } from "next/router";
+
 function UiCard() {
 
+const router = new useRouter();
   const [step,setStep]=useState(1);
 
   const handleNext=()=>{
@@ -22,6 +34,13 @@ function UiCard() {
 const handelsubmit=(values)=>{
   console.log(values)
 }
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user) => {
+if(!user) 
+router.push("/")
+  })
+})
 
   return (
     <div className="static">

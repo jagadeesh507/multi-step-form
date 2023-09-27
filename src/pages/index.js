@@ -1,8 +1,7 @@
-import UiCard from "@/components/main/UiCard"
-import FormStepper from "@/components/main/FormStepper";
+import Frontpage from "./main/Frontpage";
 const Home=()=>{
   return(
-    <UiCard/>
+    <Frontpage/>
   )
 }
 export default Home;

@@ -1,11 +1,11 @@
 import React from 'react'
-
+import SignOut from '@/components/auth/SignOut'
 function FormStepper({Step}) {
-    const steps=["YOUR INFO","SELECT PLAN","ADD-ONS","SUMMARY"]
+    const steps=["YOUR INFO","SELECT PLAN","ADD-ONS","SUMMARY",]
     console.log(Step)
   return (
        <div className='flex justify-center'>
-         <div className='grid grid-cols-4 md:grid-cols-1 gap-8 mt-[40px]'>
+         <div className='grid grid-cols-5 md:grid-cols-1 gap-4 mda:gap-8 mt-[40px]'>
         {
         steps?.map((step,i) => (
         
@@ -15,11 +15,13 @@ function FormStepper({Step}) {
             <p className='text-xs hidden md:block'>STEP {i+1}</p>
             <p className='text-sm hidden md:block'>{step}</p>
             </div>
-            
+           
         </div>
+       
 
         ))
     }
+      <SignOut/>
     </div>
        </div>
   )
