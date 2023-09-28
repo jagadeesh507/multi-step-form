@@ -3,8 +3,7 @@ import {auth} from "../auth/firebaseconfig"
 import { signOut } from 'firebase/auth';
 import { Button, Flex } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-
-import {userdata} from "./Store/authstore"
+import {userdata} from "../Store/authstore"
 function SignOut() {
   const router = new useRouter();
   

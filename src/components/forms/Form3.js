@@ -1,29 +1,35 @@
-import { Checkbox, Flex, Heading, Input } from "@chakra-ui/react";
-import { Field } from "formik";
 import React from "react";
+import { Checkbox, Flex, Heading } from "@chakra-ui/react";
+import { dataStore } from "../Store/datastore";
 
 function Form3() {
+  
+  const {check,YrOrMo}=dataStore();
+  const checkedItems = dataStore((state) => state.check);
+  const handleCheckboxChange = dataStore((state) => state.CheckedData);
+ console.log(check)
 
-  const data=[
+  const data = [
     {
-      id:1,
-      Servicetype:"Online service",
-      access:"Access to multiplayer games",
-      plan:10
+      id: 1,
+      Servicetype: "Online service",
+      access: "Access to multiplayer games",
+      plan:  YrOrMo==="yearly"?10:1,
     },
     {
-      id:2,
-      Servicetype:"Larger storage",
-      access:"Extra 1TB of cloud save",
-      plan:20,
+      id: 2,
+      Servicetype: "Larger storage",
+      access: "Extra 1TB of cloud save",
+      plan: YrOrMo==="yearly"?20:2,
     },
     {
-      id:3,
-      Servicetype:"Customizable profile",
-      access:"Custom theme on your profile",
-      plan:30
-    }
-  ]
+      id: 3,
+      Servicetype: "Customizable profile",
+      access: "Custom theme on your profile",
+      plan:  YrOrMo==="yearly"?20:2,
+    },
+  ];
+
   return (
     <div className="font-mono">
       <Heading color={"darkblue"} pb={"10px"}>
@@ -33,32 +39,28 @@ function Form3() {
         Add-ons help enhance your gaming experience.
       </p>
       <div className="grid w-full gap-6">
-        {
-          data.map((values,index)=>(
-            <div key={index} className="flex items-center pl-4 border border-gray-200 rounded pointer ">
-          <input
-          id={values.Servicetype}
-            type="checkbox"
-            value={values.id}
-            name="checked"
-            
-            className="w-6 h-6 text-blue-900 bg-gray-100 border-gray-300 rounded "
-          />
-          <label
-            htmlFor={values.Servicetype}
-            className="w-full py-4 ml-2 text-sm font-medium text-blue-900 cursor-pointer"
-          >
-            <div className="flex justify-between items-center">
-              <div className="block">
-                <p className="font-bold">{values.Servicetype}</p>
-                <p className="text-gray-400">{values.access}</p>
+        {data.map((values, index) => (
+          <div key={index} className="flex items-center pl-4 border border-gray-200 rounded pointer">
+            <Checkbox
+              id={values.Servicetype}
+              isChecked={check.some((service) => service.id === values.id)}
+              onChange={() => handleCheckboxChange(values.id, values.plan,values.Servicetype)}
+              className="w-6 h-6 text-blue-900 bg-gray-100 border-gray-300 rounded"
+            />
+            <label
+              htmlFor={values.Servicetype}
+              className="w-full py-4 ml-2 text-sm font-medium text-blue-900 cursor-pointer"
+            >
+              <div className="flex justify-between items-center">
+                <div className="block">
+                  <p className="font-bold">{values.Servicetype}</p>
+                  <p className="text-gray-400">{values.access}</p>
+                </div>
+                <p className="pr-[10px]">+${values.plan}/{ YrOrMo==="yearly"?"yr":"mo"}</p>
               </div>
-              <p className="pr-[10px]">+${values.plan}/yr</p>
-            </div>
-          </label>
-        </div>
-          ))
-        }
+            </label>
+          </div>
+        ))}
       </div>
     </div>
   );

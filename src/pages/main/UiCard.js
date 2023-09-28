@@ -9,27 +9,20 @@ import Form3 from "@/components/forms/Form3";
 import Form4 from "@/components/forms/Form4";
 import Form5 from "@/components/forms/Form5";
 import FormStepper from "./FormStepper";
-
+import {dataStore} from "../../components/Store/datastore"
 import { auth } from "@/components/auth/firebaseconfig";
 import { useRouter } from "next/router";
 
 function UiCard() {
   const router = new useRouter();
-  const [step, setStep] = useState(1);
+  const {userdata, state, nextStep, prevStep } = dataStore();
+ const handlePrev = () => {
+  prevStep(); 
+};
 
-  const handleNext = () => {
-    setStep(step + 1);
-  };
-
-  const handlePrev = () => {
-    setStep(step - 1);
-  };
-
-  const handleSubmit = (values) => {
-    console.log(values);
-    setStep(step + 1);
-  };
-
+const handleNext = (values) => {
+  nextStep(); 
+};
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) router.push("/");
@@ -47,7 +40,7 @@ function UiCard() {
         _dark={{
           bg: "gray.900",
         }}
-        mt={"40px"}
+        mt={{base:"0px",md:"40px"}}
         shadow="lg"
         rounded="lg"
         overflow="hidden"
@@ -66,7 +59,7 @@ function UiCard() {
           shadow="lg"
           m={{md: "20px" }}
         >
-          <FormStepper Step={step} />
+          <FormStepper/>
         </Box>
 
         <Box
@@ -77,12 +70,13 @@ function UiCard() {
           mt={{ base: "-120px", md: "0" }}
           borderRadius={{ base: "20px", md: "0" }}
           bg="white"
-        
+
           boxShadow={{base:"dark-lg", md: "sm" }}
           mx={{ base: "10px", md: "0" }}
         
         >
           <Box base={{ h: "full" }}>
+         
             <Formik
               initialValues={{
                 name: "",
@@ -98,15 +92,15 @@ function UiCard() {
                   .matches(/^[0-9]{10}$/, "Exactly 10 digits allowed")
                   .required("Phone number is required"),
               })}
-              onSubmit={(values) => setStep(step+1)}
+              onSubmit={(values) => handleNext()}
             >
               <Form>
-                {step === 1 && <Form1 />}
-                {step === 2 && <Form2 />}
-                {step === 3 && <Form3 />}
-                {step === 4 && <Form4 />}
-                {step === 5 && <Form5 />}
-                {step === 5 ? null : (
+                {state === 1 && <Form1 />}
+                {state === 2 && <Form2 />}
+                {state === 3 && <Form3 />}
+                {state === 4 && <Form4 />}
+                {state === 5 && <Form5 />}
+                {state === 5 ? null : (
         <Flex
           justifyContent={"space-between"}
           direction={"row"}
@@ -120,7 +114,7 @@ function UiCard() {
           rounded={"md"}
          
         >
-          <Button variant={"unstyled"} onClick={handlePrev}isDisabled={step===1}>
+          <Button variant={"unstyled"} onClick={handlePrev}isDisabled={state===1}>
             Go Back
           </Button>
           <Button
@@ -129,7 +123,7 @@ function UiCard() {
             backgroundColor={"darkblue"}
             _hover={"darkblue"}
           >
-            {step < 4 ? "Next Step" : "Confirm"}
+            {state < 4 ? "Next Step" : "Confirm"}
           </Button>
         </Flex>
       )}

@@ -3,34 +3,44 @@ import React from 'react';
 import { useState } from 'react';
 import { Switch } from '@chakra-ui/react';
 import { Field } from 'formik';
+import { dataStore } from '../Store/datastore';
 function Form2() {
+    const {SelectYrOrMo,SelectData,YrOrMo}=dataStore();
     const [ischecked,setIsChecked] = useState(false)
-    const [values,setValue]=useState(null)
+    const [values, setValue]=useState(null)
+    const setUser = SelectYrOrMo
 
-    const handleChecked=()=>{
-        setIsChecked(!ischecked)
-      }
+    const handleChecked = () => {
+      setIsChecked((prevIsChecked) => !prevIsChecked);
+      
+      setUser(ischecked ?'monthly' : 'yearly');
+    };
 
+    const handlePlanSelection=(id,name, amount)=>{
+      setValue(id);
+      SelectData(name, amount);
+    }
+  
   const data = [
     {
       id:1,
       image: '/images/icon-arcade.svg',
       name: 'Arcade',
-      amount: ischecked?"40/yr":'$09/mo',
+      amount: ischecked?90:9,
       offfer:ischecked?"2 months free":null
     },
     {
       id:2,
       image: '/images/icon-advanced.svg',
       name: 'Advanced',
-      amount: ischecked?"40/yr":'$12/mo',
+      amount: ischecked?120:12,
       offfer:ischecked?"2 months free":null
     },
     {
       id:3,
       image: '/images/icon-pro.svg',
       name: 'Pro',
-      amount: ischecked?"40/yr":'$13/mo',
+      amount: ischecked?150:13,
       offfer:ischecked?"2 months free":null
     },
   ];
@@ -51,7 +61,7 @@ function Form2() {
               value="hello"
               checked={values===item.id}
               className="hidden peer"
-              onChange={()=>setValue(item.id)}
+              onChange={() => handlePlanSelection(item.id,item.name, item.amount)}
             />
             <label
               htmlFor={item.id}
@@ -62,7 +72,7 @@ function Form2() {
               <Spacer/>
               <div className="block">
                 <div className="w-full text-lg font-bold">{item.name}</div>
-                <div className="w-full text-gray-400">{item.amount}</div>
+                <div className="w-full text-gray-400">${item.amount}/{YrOrMo==="yearly"?"yr":"mo"}</div>
                 <div className='w-full'>{item.offfer}</div>
               </div>
               </div>

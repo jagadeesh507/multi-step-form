@@ -11,6 +11,7 @@ import {
  
   function form1() {
 
+
     const formData=[
       {
           label:"Name",
@@ -46,7 +47,7 @@ import {
                 <ErrorMessage name={value.name}/>
                 </div>
                </div>
-               <Field as={Input} type={value.type} name={value.name} placeholder={value.placeholder} />
+               <Field as={Input} type={value.type} name={value.name} placeholder={value.placeholder}/>
               </chakra.div>
             ))
           }
