@@ -2,12 +2,12 @@
 import { initializeApp } from "firebase/app";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: "AIzaSyAiB82DNNuBNx0omVnc_NGwC1NNF5K37dk",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: "mutistepform.firebaseapp.com",
   projectId: "mutistepform",
   storageBucket: "mutistepform.appspot.com",
-  messagingSenderId: "720422527284",
-  appId: "1:720422527284:web:46681bbccc9dba57838561"
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGE_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
